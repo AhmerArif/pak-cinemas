@@ -11,10 +11,10 @@ PROJECT_ROOT = here("..")
 # folder(s) we pass it starting at the parent directory of the current file.
 root = lambda * x: os.path.join(os.path.abspath(PROJECT_ROOT), *x)
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*",".herokuapp.com","herokuapp.com","*.herokuapp.com","http://dry-beyond-1890.herokuapp.com/","dry-beyond-1890.herokuapp.com"]
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
