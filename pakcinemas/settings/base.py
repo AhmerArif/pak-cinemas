@@ -14,7 +14,7 @@ root = lambda * x: os.path.join(os.path.abspath(PROJECT_ROOT), *x)
 DEBUG = False
 # TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ["*",".herokuapp.com","herokuapp.com","*.herokuapp.com","http://dry-beyond-1890.herokuapp.com/","dry-beyond-1890.herokuapp.com"]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
