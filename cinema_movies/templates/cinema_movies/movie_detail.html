@@ -1,0 +1,12 @@
+{% extends "_layouts/base.html" %}
+
+{% block page_title %}{{movie.name }} | {% endblock %}
+
+{% block page_content %}
+<h2>{{ movie.name}}</h2>
+{{movie.name|linebreaks }}
+<p>{{ movie.updated_at}}</p>
+<a href="{% url 'movie:list' %}">&larr; Movie list</a>
+
+{% endblock %}
+

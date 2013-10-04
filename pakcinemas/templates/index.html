@@ -1,3 +1,7 @@
+{% load thumbnail %}
+{% m = Movie.objects.get(pk=3) %}
+<img src="{{ m.movie_poster|thumbnail_url:'avatar' }}" alt="buttes" />
+
 <h1>HELLO WORLD!!!</h1>
 
 <p style="margin:0 auto;width:194px" id="geo-wrapper"><span id="live-geolocation"></span>

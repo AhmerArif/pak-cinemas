@@ -125,15 +125,28 @@ DJANGO_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django.contrib.humanize',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
 
-THIRD_PARTY_APPS = ()
+THIRD_PARTY_APPS = ( 
+    'south',
+    'autoslug',
+    'easy_thumbnails',
+    )
 
-LOCAL_APPS = ()
+LOCAL_APPS = (
+    'cinema_movies',
+    )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'avatar': {'size': (50, 50), 'crop': True},
+    },
+}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

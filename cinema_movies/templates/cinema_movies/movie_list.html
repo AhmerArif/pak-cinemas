@@ -1,0 +1,14 @@
+{% extends "_layouts/base.html" %}
+
+{% block page_title %}Movies List | {% endblock %}
+
+{% block page_content %}
+<h1>Movies</h1>
+<ul>
+    {% for movie in movie_list %}
+    <li><a href="{{ movie.get_absolute_url }}">{{ movie.name }}</a></li>
+    {% empty %}
+    <li>Sorry, no posts yet. Check back soon!</li>
+    {% endfor %}
+</ul>
+{% endblock %}
