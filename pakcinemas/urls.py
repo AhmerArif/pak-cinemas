@@ -12,13 +12,12 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'pakcinemas.views.home', name='home'),
     # url(r'^pakcinemas/', include('pakcinemas.foo.urls')),
-    # url(r"^$", TemplateView.as_view(template_name="index.html")),
+    url(r"^$", TemplateView.as_view(template_name="index.html")),
     # url(r"^movies/", include("cinema_movies.urls", namespace = "movie")),
 	url(r'^admin/', include(admin.site.urls)),
     url(r"^movies/", include("cinema_movies.urls", namespace="movie")),
 )
 
-if settings.DEBUG:
-    urlpatterns += patterns('',
-        (r'%s(?P<path>.*)' % settings.MEDIA_URL[1:], 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-    )
+urlpatterns += patterns('',
+	(r'%s(?P<path>.*)' % settings.MEDIA_URL[1:], 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+)

@@ -14,6 +14,12 @@ class City(models.Model):
 	def __unicode__(self):
 		return self.name
 
+	def current_movies():
+		print 
+		movies = 1
+		return movies
+
+
 class Cinema(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True, editable=False)
 	updated_at = models.DateTimeField(auto_now=True,editable=False)
@@ -43,6 +49,8 @@ class Movie(models.Model):
 	def get_absolute_url(self):
 		return ("movie:detail", (), {"slug": self.slug})
 
+
+
 # Maps the details of the many to many relationship between movies and cinemas 
 class Showtime(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True, editable=False)
@@ -57,3 +65,4 @@ class Showtime(models.Model):
 		# Converts the UTC time from the DB to the application timezone. Can't see a better way to do this in Django currently
 		# but it's sad.
 		return self.movie.name + ": " + self.showing_at.astimezone(timezone(settings.TIME_ZONE)).strftime('%l:%M%p %Z on %b %d, %Y') + " at " + self.cinema.name
+

@@ -145,7 +145,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 THUMBNAIL_ALIASES = {
     '': {
-        'small': {'size': (50, 50), 'crop': True},
+        'small': {'size': (120, 120), 'crop': False},
     },
 }
 
