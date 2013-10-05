@@ -5,7 +5,6 @@ from django.conf import settings
 
 # from cinema_movies.views import movie_list, movie_detail
 
-
 admin.autodiscover()
 
 urlpatterns = patterns('',
