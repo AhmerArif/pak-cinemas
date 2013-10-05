@@ -32,7 +32,9 @@ class Movie(models.Model):
 	slug = AutoSlugField(populate_from='name')
 	imdb_url = models.URLField(blank=True)
 	rotten_tomatoes_url = models.URLField(blank=True)
-	movie_poster = ThumbnailerImageField(upload_to='photos', blank=True)
+	movie_poster = ThumbnailerImageField(upload_to='images/', default = 'images/no-img.jpg')
+	# movie_poster = models.ImageField(upload_to = 'images/', default = 'images/no-img.jpg')
+	# thumb_url = get_thumbnailer(movie_poster)['small'].url
 
 	def __unicode__(self):
 		return self.name

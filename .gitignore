@@ -1,2 +1,6 @@
 *.pyc
+*.jpg
+*.png
+*.bmp
+*.gif
 pakcinemas/settings/local.py
