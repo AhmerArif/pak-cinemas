@@ -15,3 +15,5 @@ install:
   # - pyflakes -x W src
 script:
   - python manage.py test --settings=pakcinemas.settings.testing
+notifications:
+  email: false
