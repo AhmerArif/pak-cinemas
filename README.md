@@ -1,5 +1,6 @@
 Pak-Cinemas
 ===========
+[![Build Status](https://travis-ci.org/AhmerArif/pak-cinemas.png)](https://travis-ci.org/AhmerArif/pak-cinemas.png)
 
 A Django powered cinema show-time aggregator! Coming real soon!
 
