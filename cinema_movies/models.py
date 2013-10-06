@@ -17,11 +17,10 @@ class City(models.Model):
 		return self.name
 
 	def available_cinemas_for_movie(self, movie_name="", future_date =7):
-		cinemas = self.cinemas.filter(showtimes__movie__name__exact=movie_name, 
+		return self.cinemas.filter(showtimes__movie__name__exact=movie_name, 
 			showtimes__showing_at__gte=(timezone.now() - datetime.timedelta(hours=2)),
 			showtimes__showing_at__lte=(timezone.now() + datetime.timedelta(days=future_date))
-			)
-		return cinemas
+			).order_by('name')
 
 class Cinema(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True, editable=False)
@@ -31,10 +30,11 @@ class Cinema(models.Model):
 	website_url = models.URLField()
 	city = models.ForeignKey(City, db_index=True, related_name="cinemas")
 
-	def current_showtimes_for_movie(self, future_date=7, movie=""):
-		showtimes = self.showtimes.filter(showing_at__gte=(timezone.now() - datetime.timedelta(hours=2)))
-		return showtimes.filter(showing_at__lte=(timezone.now() + datetime.timedelta(days=future_date))) 
-		# return self.showtimes.all()
+	def current_showtimes_for_movie(self, movie_name="",future_date=7):
+		return self.showtimes.filter(movie__name=movie_name,
+			showing_at__gte=(timezone.now() - datetime.timedelta(hours=2)),
+			showing_at__lte=(timezone.now() + datetime.timedelta(days=future_date))
+			).order_by('showing_at') 
 
 	def __unicode__(self):
 		return self.name
