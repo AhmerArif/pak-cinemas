@@ -134,7 +134,8 @@ THIRD_PARTY_APPS = (
     'south',
     'autoslug',
     'easy_thumbnails',
-    'PIL'
+    'PIL',
+    'model_mommy',
     )
 
 LOCAL_APPS = (
@@ -177,3 +178,11 @@ LOGGING = {
         },
     }
 }
+
+def gen_func():
+    return 'blah'
+
+MOMMY_CUSTOM_FIELDS_GEN = {
+    'autoslug.fields.AutoSlugField': gen_func,
+}
+

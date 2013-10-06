@@ -2,6 +2,8 @@ from django.db import models
 from autoslug import AutoSlugField
 from pytz import timezone
 from django.conf import settings
+from django.utils import timezone
+import datetime
 from easy_thumbnails.fields import ThumbnailerImageField
 
 class City(models.Model):
@@ -14,11 +16,12 @@ class City(models.Model):
 	def __unicode__(self):
 		return self.name
 
-	def current_movies():
-		print 
-		movies = 1
-		return movies
-
+	def available_cinemas_for_movie(self, movie_name="", future_date =7):
+		cinemas = self.cinemas.filter(showtimes__movie__name__exact=movie_name, 
+			showtimes__showing_at__gte=(timezone.now() - datetime.timedelta(hours=2)),
+			showtimes__showing_at__lte=(timezone.now() + datetime.timedelta(days=future_date))
+			)
+		return cinemas
 
 class Cinema(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True, editable=False)
@@ -26,7 +29,12 @@ class Cinema(models.Model):
 	name = models.CharField(max_length=255, db_index=True, unique=True)
 	slug = AutoSlugField(populate_from='name')
 	website_url = models.URLField()
-	city = models.ForeignKey(City, db_index=True, related_name="cinemas") 
+	city = models.ForeignKey(City, db_index=True, related_name="cinemas")
+
+	def current_showtimes_for_movie(self, future_date=7, movie=""):
+		showtimes = self.showtimes.filter(showing_at__gte=(timezone.now() - datetime.timedelta(hours=2)))
+		return showtimes.filter(showing_at__lte=(timezone.now() + datetime.timedelta(days=future_date))) 
+		# return self.showtimes.all()
 
 	def __unicode__(self):
 		return self.name
@@ -49,7 +57,13 @@ class Movie(models.Model):
 	def get_absolute_url(self):
 		return ("movie:detail", (), {"slug": self.slug})
 
+	def current_movies_in_city(self,city=""):
+		return "herp"
 
+	def current_showtimes(self, future_date=7):
+		showtimes = self.showtimes.filter(showing_at__gte=(timezone.now() - datetime.timedelta(hours=2)))
+		return showtimes.filter(showing_at__lte=(timezone.now() + datetime.timedelta(days=future_date))) 
+		# return self.showtimes.all()
 
 # Maps the details of the many to many relationship between movies and cinemas 
 class Showtime(models.Model):
@@ -63,6 +77,5 @@ class Showtime(models.Model):
 
 	def __unicode__(self):
 		# Converts the UTC time from the DB to the application timezone. Can't see a better way to do this in Django currently
-		# but it's sad.
 		return self.movie.name + ": " + self.showing_at.astimezone(timezone(settings.TIME_ZONE)).strftime('%l:%M%p %Z on %b %d, %Y') + " at " + self.cinema.name
 

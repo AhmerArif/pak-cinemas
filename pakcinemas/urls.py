@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r"^movies/", include("cinema_movies.urls", namespace="movie")),
 )
 
+# TODO: Throw this garbage out when deploying to S3 later
 urlpatterns += patterns('',
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
         'document_root': settings.STATIC_ROOT,

@@ -3,10 +3,12 @@ PIL==1.1.7
 Pillow==2.1.0
 South==0.8.2
 argparse==1.2.1
+boto==2.13.3
 coverage==3.6
 dj-database-url==0.2.2
 django-autoslug==1.7.1
 django-discover-runner==1.0
+django-storages==1.1.8
 easy-thumbnails==1.4
 psycopg2==2.5.1
 pytz>=2013d
