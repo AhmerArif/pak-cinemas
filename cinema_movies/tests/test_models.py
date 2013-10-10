@@ -16,6 +16,19 @@ class CityTests(TestCase):
         self.assertTrue(isinstance(city, City))
         self.assertEqual(city.__unicode__(), city.name)
 
+    def test_current_city(self):
+        city = mommy.make('City')
+        city_all = mommy.make('City', name="All")
+        self.assertEqual(city, City.objects.current_city(city.slug))
+        self.assertEqual(city_all, City.objects.current_city(KeyError(" error")))
+
+    def test_available_movies_in_city(self):
+        city = mommy.make('City')
+        cinema = mommy.make('Cinema', city=city)
+        movie = mommy.make('Movie')
+        showtime = mommy.make('Showtime', movie=movie, cinema=cinema, showing_at=(timezone.now()))
+        self.assertIn(movie, city.available_movies())
+
     def test_available_cinemas_for_movie_cinema_check_city(self):
         city = mommy.make('City')
         cinema = mommy.make('Cinema')
